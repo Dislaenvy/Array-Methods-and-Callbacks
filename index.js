@@ -105,22 +105,9 @@ Use the higher order function getAverageGoals to do the following:
  Example of invocation: getAverageGoals(getFinals(fifaData));
 */
 
-function getAverageGoals(getFinalsCB, fifa) {
-    const counter = 0;
-    const average = fifa.map((goals) => {
-        if(goals['Home Team Goals'] > goals['Away Team Goals']){
-            return goals['Home Team Initials']
-        }else {
-            return goals['Away Team Initials']
-        };
-        
-    })
-    average.forEach(element => {
-        if(element === fifa){
-            counter++;
-        }
-    })
-    return counter;
+function getAverageGoals(getFinalsCB) {
+    const averageGoals = getFinalsCB.reduce((accumulator, index) => accumulator + index['Home Team Goals'] + index['Away Team Goals'],0);
+    return (averageGoals / getFinalsCB.length).toFixed(2);
 }
 
 
